@@ -11,6 +11,7 @@ namespace Game03
 
         private FoxSprite fox;
         private DogSprite dog;
+        private ResetBox box;
 
         public Game03()
         {
@@ -25,6 +26,7 @@ namespace Game03
 
             fox = new FoxSprite();
             dog = new DogSprite();
+            box = new ResetBox();
 
             base.Initialize();
         }
@@ -37,6 +39,7 @@ namespace Game03
 
             fox.LoadContent(Content);
             dog.LoadContent(Content);
+            box.LoadContent(Content);
         }
 
         protected override void Update(GameTime gameTime)
@@ -47,12 +50,19 @@ namespace Game03
             // TODO: Add your update logic here
 
             fox.Update(gameTime);
+            dog.Update(gameTime);
 
             //fox turns red if colliding with dog
             fox.color = Color.White;
             if(fox.Bounds.CollidesWith(dog.Bounds))
             {
                 fox.color = Color.Red;
+            }
+
+            //if dog hits reset box it will reset dogs position
+            if(dog.Bounds.CollidesWith(box.Bounds))
+            {
+                dog.Position = new Vector2(810, 300);
             }
 
             base.Update(gameTime);
@@ -67,6 +77,7 @@ namespace Game03
             spriteBatch.Begin();
             fox.Draw(gameTime, spriteBatch);
             dog.Draw(gameTime, spriteBatch);
+            box.Draw(gameTime, spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

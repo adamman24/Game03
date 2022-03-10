@@ -14,7 +14,7 @@ namespace Game03
         private double animationTimer;
         private short animationFrame = 4;
 
-        public Vector2 Position = new Vector2(300, 300);
+        public Vector2 Position = new Vector2(810, 300);
 
         private BoundingRectangle dogBounds;
 
@@ -44,7 +44,9 @@ namespace Game03
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
-
+            Position += new Vector2(-5 , 0);
+            dogBounds.X = Position.X;
+            dogBounds.Y = Position.Y;
         }
 
         /// <summary>
