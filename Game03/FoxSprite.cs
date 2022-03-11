@@ -14,6 +14,8 @@ namespace Game03
         private Texture2D texture;
         private double animationTimer;
         private short animationFrame = 1;
+        private bool jumping = false;
+        private short jumpFrame = 1;
 
         /// <summary>
         /// used for keyboard input
@@ -67,6 +69,10 @@ namespace Game03
                 position += new Vector2(1, 0);
             }
 
+            if(currentState.IsKeyDown(Keys.Space))
+            {
+                jumping = true;
+            }
 
             bounds.X = position.X;
             bounds.Y = position.Y;
@@ -81,19 +87,46 @@ namespace Game03
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             animationTimer += gameTime.ElapsedGameTime.TotalSeconds;
+            Rectangle source; 
 
-            if(animationTimer > .1)
+            if (!jumping)
             {
-                animationFrame++;
-                if(animationFrame > 4)
+                if (animationTimer > .1)
                 {
-                    animationFrame = 1;
+                    animationFrame++;
+                    if (animationFrame > 7)
+                    {
+                        animationFrame = 1;
+                    }
+                    animationTimer -= .1;
                 }
-                animationTimer -= .1;
+                source = new Rectangle(animationFrame * 32, 2 * 32, 32, 32);
+                spriteBatch.Draw(texture, position, source, color, 0, Vector2.Zero, 2.5f, SpriteEffects.None, 0);
+            }
+            if(jumping)
+            {
+                if (animationFrame != jumpFrame) animationFrame = jumpFrame;
+                if(animationTimer > .125)
+                {
+                    animationFrame++;
+                    jumpFrame++;
+                    if(animationFrame > 10)
+                    {
+                        animationFrame = 1;
+                    }
+                    animationTimer -= .125;
+                }
+                source = new Rectangle(animationFrame * 32, 3 * 32, 32, 32);
+                spriteBatch.Draw(texture, position, source, color, 0, Vector2.Zero, 2.5f, SpriteEffects.None, 0);
             }
 
-            var source = new Rectangle(animationFrame * 32, 0, 32, 32);
-            spriteBatch.Draw(texture, position, source, color, 0, Vector2.Zero, 2.5f, SpriteEffects.None, 0);
+            if(jumping && jumpFrame >= 10)
+            {
+                jumping = false;
+                jumpFrame = 1;
+                animationFrame = 1;
+            }
+            
         }
     }
 }
