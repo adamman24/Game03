@@ -16,6 +16,8 @@ namespace Game03
         private short animationFrame = 1;
         private bool jumping = false;
         private short jumpFrame = 1;
+        private Vector2 velocity;
+        private Vector2 acceleration;
 
         /// <summary>
         /// used for keyboard input
@@ -24,7 +26,7 @@ namespace Game03
         private KeyboardState currentState;
 
         //position of sprite
-        private Vector2 position = new Vector2(50, 300);
+        public Vector2 position = new Vector2(50, 360);
 
         private BoundingRectangle bounds; 
 
@@ -45,7 +47,8 @@ namespace Game03
         public void LoadContent(ContentManager content)
         {
             texture = content.Load<Texture2D>("BrownFox");
-            bounds = new BoundingRectangle(new Vector2(position.X - 32, position.Y - 32), 50,  40);
+            bounds = new BoundingRectangle(new Vector2(position.X - 32, position.Y - 32), 30,  40);
+            //velocity = new Vector2(0, 10);
         }
 
         /// <summary>
@@ -57,8 +60,9 @@ namespace Game03
         {
             previousState = currentState;
             currentState = Keyboard.GetState();
+            
 
-            if (currentState.IsKeyDown(Keys.Up) || currentState.IsKeyDown(Keys.W)) position += new Vector2(0, -1);
+            /*if (currentState.IsKeyDown(Keys.Up) || currentState.IsKeyDown(Keys.W)) position += new Vector2(0, -1);
             if (currentState.IsKeyDown(Keys.Down) || currentState.IsKeyDown(Keys.S)) position += new Vector2(0, 1);
             if (currentState.IsKeyDown(Keys.Left) || currentState.IsKeyDown(Keys.A))
             {
@@ -67,16 +71,56 @@ namespace Game03
             if (currentState.IsKeyDown(Keys.Right) || currentState.IsKeyDown(Keys.D))
             {
                 position += new Vector2(1, 0);
-            }
+            }*/
 
-            if(currentState.IsKeyDown(Keys.Space))
+            if(currentState.IsKeyDown(Keys.Space) && previousState.IsKeyUp(Keys.Space) ||
+               currentState.IsKeyDown(Keys.Up) && previousState.IsKeyUp(Keys.Up))
             {
                 jumping = true;
             }
 
-            bounds.X = position.X;
+            if(jumping)
+            {
+                Jump();
+            }else
+            {
+                acceleration.Y = 0;
+                velocity.Y = 0;
+                position.Y = 360;
+            }
+            position.X += 5;
+            //bounds.X = position.X;
             bounds.Y = position.Y;
         }
+
+        /// <summary>
+        /// this function controls the fox y position
+        /// it will create a jump like movement 
+        /// pretty sure this is not the right way
+        /// but it works and brings great joy
+        /// </summary>
+        public void Jump()
+        {
+            if(position.Y == 360)
+            {
+                acceleration.Y = -.1f;
+            }
+            
+            if (position.Y < 340)
+            {
+                acceleration.Y = .1f;
+            }
+
+            velocity.Y += acceleration.Y;
+            position.Y += velocity.Y;
+
+            if (position.Y > 3600)
+            {
+                position.Y = 360;
+                acceleration.Y = 0;
+            }
+        }
+
 
         /// <summary>
         /// draw the fox and update its animation to make it

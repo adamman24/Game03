@@ -14,7 +14,7 @@ namespace Game03
         private double animationTimer;
         private short animationFrame = 4;
 
-        public Vector2 Position = new Vector2(810, 300);
+        public Vector2 Position = new Vector2(810, 370);
 
         private BoundingRectangle dogBounds;
 
