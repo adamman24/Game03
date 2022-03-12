@@ -84,10 +84,10 @@ namespace Game03
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             float offset = 50 - fox.position.X;
-            Matrix transform; 
+            Matrix transform;
+            int xPosition = 0;
 
             // TODO: Add your drawing code here
 
@@ -96,25 +96,44 @@ namespace Game03
             //back trees
             transform = Matrix.CreateTranslation(offset * .11f, 0, 0);
             spriteBatch.Begin(transformMatrix: transform);
-            spriteBatch.Draw(_back, new Vector2(0, 00), source, Color.White, 0f, Vector2.Zero, new Vector2(3, 3.5f), SpriteEffects.None, 0);
+            for(int i = 0; i < 20; i++)
+            {
+                spriteBatch.Draw(_back, new Vector2(xPosition, 0), source, Color.White, 0f, Vector2.Zero, new Vector2(3, 3.5f), SpriteEffects.None, 0);
+                xPosition += 950;
+            }
             spriteBatch.End();
 
             //middle trees
+            xPosition = 0;
             transform = Matrix.CreateTranslation(offset * .33f, 0, 0);
             spriteBatch.Begin(transformMatrix: transform);
-            spriteBatch.Draw(_middle, new Vector2(0, 00), source, Color.White, 0f, Vector2.Zero, new Vector2(3, 3.5f), SpriteEffects.None, 0);
+            for (int i = 0; i < 20; i++)
+            {
+                spriteBatch.Draw(_middle, new Vector2(xPosition, 0), source, Color.White, 0f, Vector2.Zero, new Vector2(3, 3.5f), SpriteEffects.None, 0);
+                xPosition += 800;
+            }
             spriteBatch.End();
 
             //front trees
+            xPosition = 0;
             transform = Matrix.CreateTranslation(offset* .66f, 0, 0);
             spriteBatch.Begin(transformMatrix: transform);
-            spriteBatch.Draw(_front, new Vector2(0, 00), source, Color.White, 0f, Vector2.Zero, new Vector2(3, 3.5f), SpriteEffects.None, 0);
+            for (int i = 0; i < 50; i++)
+            {
+                spriteBatch.Draw(_front, new Vector2(xPosition, 0), source, Color.White, 0f, Vector2.Zero, new Vector2(3, 3.5f), SpriteEffects.None, 0);
+                xPosition += 800;
+            }
             spriteBatch.End();
 
             //foreground
+            xPosition = 0;
             transform = Matrix.CreateTranslation(offset, 0, 0);
             spriteBatch.Begin(transformMatrix: transform);
-            spriteBatch.Draw(_foreground, new Vector2(0, -145), source, Color.White, 0f, Vector2.Zero, new Vector2(5, 3.5f), SpriteEffects.None, 0);
+            for(int i = 0; i < 50; i++)
+            {
+                spriteBatch.Draw(_foreground, new Vector2(xPosition, -145), source, Color.White, 0f, Vector2.Zero, new Vector2(5, 3.5f), SpriteEffects.None, 0);
+                xPosition += 800;
+            }
             fox.Draw(gameTime, spriteBatch);
             spriteBatch.End();
 
