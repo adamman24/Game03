@@ -1,0 +1,9 @@
+﻿Content/BrownFox.png - created by Elthen of Itch.io (https://elthen.itch.io/2d-pixel-art-fox-sprites)and released for public domain
+
+Content/LazyDog.png - created by Broke One Pixel Studio of Itch.io (https://broke-one-pixel-studio.itch.io/2d-pixel-art-character-sprite-with-28-animations)and released for public domain
+
+Content/BackTrees,MiddleTrees,FrontTrees,Foreground.png - created as a parallax set by Celehere218 of Itch.io (https://celeshere218.itch.io/forest-parallax)and released for public domain
+
+Content/FinsihLine.png - from pinClipart (https://www.pinclipart.com/pindetail/ihRoRwJ_finish-line-clipart-transparent-background-monochrome-png-download/) licensed for personal use
+
+Content/Drop.png - created by Nathan Bean and realeased into public domain
