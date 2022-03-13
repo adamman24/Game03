@@ -35,7 +35,7 @@ namespace Game03
         public void LoadContent(ContentManager content)
         {
             texture = content.Load<Texture2D>("LazyDog");
-            dogBounds = new BoundingRectangle(Position, 30, 20);
+            dogBounds = new BoundingRectangle(new Vector2(Position.X - 64, Position.Y), 20, 10);
         }
 
         /// <summary>

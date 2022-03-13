@@ -47,7 +47,7 @@ namespace Game03
         public void LoadContent(ContentManager content)
         {
             texture = content.Load<Texture2D>("BrownFox");
-            bounds = new BoundingRectangle(new Vector2(position.X - 32, position.Y - 32), 30,  40);
+            bounds = new BoundingRectangle(new Vector2(position.X - 32, position.Y - 32), 80,  40);
             //velocity = new Vector2(0, 10);
         }
 

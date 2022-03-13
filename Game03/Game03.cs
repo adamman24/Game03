@@ -22,9 +22,7 @@ namespace Game03
         private Texture2D _back;
         private Texture2D _middle;
         private Texture2D _front;
-
-        //background particles
-        BackgroundParticleSystem _particles;
+        private SpriteFont spriteFont;
 
         public Game03()
         {
@@ -41,12 +39,15 @@ namespace Game03
             fox = new FoxSprite();
             dog = new DogSprite();
             box = new ResetBox();
+            spriteFont = Content.Load<SpriteFont>("arial");
 
             //load textures
             _foreground = Content.Load<Texture2D>("Foreground");
             _front = Content.Load<Texture2D>("FrontTrees");
             _middle = Content.Load<Texture2D>("MiddleTrees");
             _back = Content.Load<Texture2D>("BackTrees");
+            RainParticleSystem rain = new RainParticleSystem(this, new Rectangle(0, -20, 800, 10));
+            Components.Add(rain);
 
             base.Initialize();
         }
@@ -110,18 +111,15 @@ namespace Game03
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            float time = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float offset = 50 - fox.position.X;
             Matrix transform;
             int xPosition = 0;
 
             // TODO: Add your drawing code here
-
-            if(!running)
-            {
-
-            }
-
+            
+            
+           
             var source = new Rectangle(0, 0, 320,179);
 
             //back trees
@@ -171,6 +169,9 @@ namespace Game03
             spriteBatch.Begin();
             dog.Draw(gameTime, spriteBatch);
             box.Draw(gameTime, spriteBatch);
+            spriteBatch.DrawString(spriteFont,
+                "Press SPACE or UP to jump \nPress enter to continue",
+                new Vector2(2, 2), Color.Yellow, 0f, Vector2.Zero, .5f, SpriteEffects.None, 0);
             spriteBatch.End();
 
             base.Draw(gameTime);
