@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 
 namespace Game03
 {
@@ -12,12 +13,18 @@ namespace Game03
         private FoxSprite fox;
         private DogSprite dog;
         private ResetBox box;
+        private bool running = true;
+        private KeyboardState current;
+        private KeyboardState prior;
 
         //layer textures
         private Texture2D _foreground;
         private Texture2D _back;
         private Texture2D _middle;
         private Texture2D _front;
+
+        //background particles
+        BackgroundParticleSystem _particles;
 
         public Game03()
         {
@@ -59,28 +66,47 @@ namespace Game03
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            prior = current;
+            current = Keyboard.GetState();
+            running = true;
             // TODO: Add your update logic here
-
-            fox.Update(gameTime);
-            dog.Update(gameTime);
-
-            //fox turns red if colliding with dog
-            fox.color = Color.White;
-            if(fox.Bounds.CollidesWith(dog.Bounds))
+            if (fox.Bounds.CollidesWith(dog.Bounds))
             {
                 fox.color = Color.Red;
+                running = false;
             }
 
-            //if dog hits reset box it will reset dogs position
-            if(dog.Bounds.CollidesWith(box.Bounds))
+            //allows user to continue playing game if they hit the dog and lose
+            if(!running && current.IsKeyDown(Keys.Enter) && prior.IsKeyUp(Keys.Enter))
             {
+                running = true;
                 dog.Position = new Vector2(810, 370);
             }
 
+            if(running)
+            {
+                fox.Update(gameTime);
+                dog.Update(gameTime);
+
+                //fox turns red if colliding with dog
+                //so this resets it to white
+                fox.color = Color.White;
+
+
+                //if dog hits reset box it will reset dogs position
+                if (dog.Bounds.CollidesWith(box.Bounds))
+                {
+                    dog.Position = new Vector2(810, 370);
+                }
+            }
+            
             base.Update(gameTime);
         }
 
+        /// <summary>
+        /// draw all things necessary for the game
+        /// </summary>
+        /// <param name="gameTime"></param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -90,6 +116,11 @@ namespace Game03
             int xPosition = 0;
 
             // TODO: Add your drawing code here
+
+            if(!running)
+            {
+
+            }
 
             var source = new Rectangle(0, 0, 320,179);
 
