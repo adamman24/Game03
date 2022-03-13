@@ -26,7 +26,7 @@ namespace Game03
 
         protected override void InitializeParticle(ref Particle p, Vector2 where)
         {
-            p.Initialize(where, Vector2.UnitY * 260, Vector2.Zero, Color.LightSkyBlue, scale: RandomHelper.NextFloat(.1f, .4f), lifetime: 3);
+            p.Initialize(where, Vector2.UnitY * 260, Vector2.Zero, Color.LightSkyBlue, scale: RandomHelper.NextFloat(.05f, .2f), lifetime: 3);
         }
 
         public override void Update(GameTime gameTime)
