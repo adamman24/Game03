@@ -23,6 +23,7 @@ namespace Game03
         private Texture2D _middle;
         private Texture2D _front;
         private SpriteFont spriteFont;
+        private Tilemap _tilemap;
 
         public Game03()
         {
@@ -48,6 +49,7 @@ namespace Game03
             _back = Content.Load<Texture2D>("BackTrees");
             RainParticleSystem rain = new RainParticleSystem(this, new Rectangle(0, -20, 800, 10));
             Components.Add(rain);
+            _tilemap = new Tilemap("map.txt");
 
             base.Initialize();
         }
@@ -61,6 +63,7 @@ namespace Game03
             fox.LoadContent(Content);
             dog.LoadContent(Content);
             box.LoadContent(Content);
+            _tilemap.LoadContent(Content);
         }
 
         protected override void Update(GameTime gameTime)
@@ -166,7 +169,13 @@ namespace Game03
             fox.Draw(gameTime, spriteBatch);
             spriteBatch.End();
 
+            //tilemap work
+            spriteBatch.Begin(transformMatrix: Matrix.CreateTranslation(0, 50, 0));
+            _tilemap.Draw(gameTime, spriteBatch);
+            spriteBatch.End();
+
             spriteBatch.Begin();
+            
             dog.Draw(gameTime, spriteBatch);
             box.Draw(gameTime, spriteBatch);
             spriteBatch.DrawString(spriteFont,
