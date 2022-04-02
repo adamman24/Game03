@@ -7,3 +7,5 @@ Content/BackTrees,MiddleTrees,FrontTrees,Foreground.png - created as a parallax 
 Content/FinsihLine.png - from pinClipart (https://www.pinclipart.com/pindetail/ihRoRwJ_finish-line-clipart-transparent-background-monochrome-png-download/) licensed for personal use
 
 Content/Drop.png - created by Nathan Bean and realeased into public domain
+
+Content/RockTileMap.png - created by Bruno of Itch.io (https://brunorobert.itch.io/dirt-tilemap)and released for public domain
