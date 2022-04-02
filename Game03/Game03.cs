@@ -170,7 +170,7 @@ namespace Game03
             spriteBatch.End();
 
             //tilemap work
-            spriteBatch.Begin(transformMatrix: Matrix.CreateTranslation(0, 50, 0));
+            spriteBatch.Begin(transformMatrix: Matrix.CreateTranslation(offset, -10, 0));
             _tilemap.Draw(gameTime, spriteBatch);
             spriteBatch.End();
 
