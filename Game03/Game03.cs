@@ -25,6 +25,8 @@ namespace Game03
         private SpriteFont spriteFont;
         private Tilemap _tilemap;
 
+        Cube cube;
+
         public Game03()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -64,6 +66,7 @@ namespace Game03
             dog.LoadContent(Content);
             box.LoadContent(Content);
             _tilemap.LoadContent(Content);
+            cube = new Cube(this);
         }
 
         protected override void Update(GameTime gameTime)
@@ -103,7 +106,9 @@ namespace Game03
                     dog.Position = new Vector2(810, 370);
                 }
             }
-            
+
+            cube.Update(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -175,7 +180,7 @@ namespace Game03
             spriteBatch.End();
 
             spriteBatch.Begin();
-            
+            cube.Draw();
             dog.Draw(gameTime, spriteBatch);
             box.Draw(gameTime, spriteBatch);
             spriteBatch.DrawString(spriteFont,
