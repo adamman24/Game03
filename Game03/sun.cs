@@ -63,7 +63,6 @@ namespace Game03
         /// </summary>
         public void InitializeVertices()
         {
-            int x, y, z;
             var vertexData = new VertexPositionColor[] {
             new VertexPositionColor() { Position = new Vector3(-1,  1, -1), Color = Color.Red },
             new VertexPositionColor() { Position = new Vector3( 1,  1, -1), Color = Color.Orange },
